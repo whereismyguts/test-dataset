@@ -1,0 +1,128 @@
+{
+  "name": "Tasks Integration [drive]  v2",
+  "nodes": [
+    {
+      "parameters": {
+        "updates": [
+          "message"
+        ],
+        "additionalFields": {
+          "download": true
+        }
+      },
+      "type": "n8n-nodes-base.telegramTrigger",
+      "typeVersion": 1.2,
+      "position": [
+        80,
+        208
+      ],
+      "id": "7862fb7b-f6c6-435f-af61-8b4067803ece",
+      "name": "Telegram Trigger",
+      "webhookId": "b432798c-bf58-4740-8ec5-b665ada291e6",
+      "credentials": {
+        "telegramApi": {
+          "id": "cRYc0y1WJPn6XGQi",
+          "name": "mtl bot"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "chatId": "={{ $('Telegram Trigger').item.json.message.chat.id }}",
+        "text": "={{ $json.output }}",
+        "additionalFields": {
+          "appendAttribution": false,
+          "parse_mode": "Markdown"
+        }
+      },
+      "type": "n8n-nodes-base.telegram",
+      "typeVersion": 1.2,
+      "position": [
+        544,
+        208
+      ],
+      "id": "4db8d6c6-49aa-44c8-bdba-6dcf4b886f09",
+      "name": "Send a text message",
+      "webhookId": "394260a2-71af-4c73-886e-10fc9ee5440d",
+      "credentials": {
+        "telegramApi": {
+          "id": "cRYc0y1WJPn6XGQi",
+          "name": "mtl bot"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "resource": "file",
+        "owner": {
+          "__rl": true,
+          "mode": "list",
+          "value": ""
+        },
+        "repository": {
+          "__rl": true,
+          "mode": "list",
+          "value": ""
+        }
+      },
+      "type": "n8n-nodes-base.github",
+      "typeVersion": 1.1,
+      "position": [
+        176,
+        368
+      ],
+      "id": "203a1920-453f-4cbd-a9da-d29156ee6b93",
+      "name": "Create a file",
+      "webhookId": "f57aeda7-ec37-4673-961b-16f57d8efadb"
+    },
+    {
+      "parameters": {
+        "resource": "file",
+        "operation": "list",
+        "owner": {
+          "__rl": true,
+          "mode": "list",
+          "value": ""
+        },
+        "repository": {
+          "__rl": true,
+          "mode": "list",
+          "value": ""
+        }
+      },
+      "type": "n8n-nodes-base.github",
+      "typeVersion": 1.1,
+      "position": [
+        272,
+        512
+      ],
+      "id": "573a649b-b031-4fc9-aad3-c20b82a768ea",
+      "name": "List files",
+      "webhookId": "76028d8e-0847-41a5-9b47-11856f4273b5"
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "Telegram Trigger": {
+      "main": [
+        []
+      ]
+    },
+    "Create a file": {
+      "main": [
+        []
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "versionId": "f0e7fc9d-8cf2-49fb-9ac3-16fcc6f0b182",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "4c16684ab591639af3fb8bae6d472c7df0842a82cc928291bba645aac1cd775b"
+  },
+  "id": "3s55sBLXGx1hC12z",
+  "tags": []
+}
